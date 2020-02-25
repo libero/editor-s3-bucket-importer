@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "esnext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./dist/bin",
+    "strict": true,
     "noImplicitAny": true,
-    "removeComments": true,
     "preserveConstEnums": true,
-    "outDir": "dist/bin/",
-    "sourceMap": true
+    "strictNullChecks": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "test/**/*"]

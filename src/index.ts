@@ -1,5 +1,4 @@
-function main(): void {
-  return;
-}
+import { ConfigurationManager } from './configurationManager';
 
-main();
+const args: string[] = process.argv.slice(2);
+const configurationManager: ConfigurationManager = new ConfigurationManager(args);
