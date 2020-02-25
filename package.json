@@ -1,0 +1,18 @@
+{
+  "name": "@libero/editor-s3-bucket-importer",
+  "version": "0.0.0",
+  "description": "Service to monitor and import manuscripts from AWS S3 Buckets",
+  "main": "./src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "NuclearRedeye",
+    "email": "j.summerfield@elifesciences.org"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.8.2"
+  }
+}
