@@ -1,13 +1,23 @@
-export interface IConfigurationManager {
-  addConfigItem(key: string, value: string): void;
-  getConfigItem(key: string): string;
-}
+import { Configuration } from './configuration';
 
-export class ConfigurationManager implements IConfigurationManager {
+export class ConfigurationManager {
   private config: Map<string, string>;
 
-  constructor(args: string[]) {
+  constructor(defaults: Configuration, seed?: Configuration) {
     this.config = new Map();
+
+    // Initialise the manager with the defaults
+    for (let [key, value] of Object.entries(defaults)) {
+      this.config.set(key, value);
+    }
+
+    if (seed) {
+      for (let [key, value] of Object.entries(seed)) {
+        if (this.config.has(key)) {
+          this.config.set(key, value);
+        }
+      }
+    }
   }
 
   addConfigItem(key: string, value: string): void {

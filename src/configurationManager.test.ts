@@ -3,7 +3,7 @@ import { ConfigurationManager } from './configurationManager';
 describe('ConfigurationManager::addConfigItem', () => {
   let conMan: ConfigurationManager;
   beforeAll(() => {
-    conMan = new ConfigurationManager([]);
+    conMan = new ConfigurationManager({});
   });
 
   it('Not throw an exception on successs', () => {
@@ -22,7 +22,7 @@ describe('ConfigurationManager::addConfigItem', () => {
 describe('ConfigurationManager::getConfigItem', () => {
   let conMan: ConfigurationManager;
   beforeAll(() => {
-    conMan = new ConfigurationManager([]);
+    conMan = new ConfigurationManager({});
     conMan.addConfigItem('test', 'value');
   });
 
