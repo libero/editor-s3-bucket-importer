@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "lint": "echo nothing to do for target 'lint'",
     "test": "jest --config jestconfig.json",
     "release": "standard-version"
   },
