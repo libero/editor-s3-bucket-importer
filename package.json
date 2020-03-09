@@ -1,7 +1,7 @@
 {
   "name": "@libero/editor-s3-bucket-importer",
   "version": "0.0.0",
-  "description": "Service to monitor and import manuscripts from AWS S3 Buckets",
+  "description": "Service to monitor and import articles from AWS S3 Buckets",
   "main": "./src/index.js",
   "type": "module",
   "files": [
