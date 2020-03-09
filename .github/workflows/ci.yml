@@ -28,6 +28,9 @@ jobs:
       - name: Publish
         if: contains(github.ref, 'refs/tags/v')
         run: |
-          echo "nothing to do for step 'publish'"
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker build --no-cache -t $DOCKER_USERNAME/editor-s3-bucket-importer:$GITHUB_SHA -t $DOCKER_USERNAME/editor-s3-bucket-importer:latest .
+          docker push $DOCKER_USERNAME/editor-s3-bucket-importer
         env:
-          DOCKER_AUTH_TOKEN: ${{secrets.docker_token}}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
