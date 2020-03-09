@@ -1,4 +1,4 @@
-import { ConfigurationManager } from '../src/configurationManager';
+import { ConfigurationManager } from './configurationManager';
 
 describe('ConfigurationManager::addConfigItem', () => {
   let conMan: ConfigurationManager;

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Service to monitor and import manuscripts from AWS S3 Buckets",
   "main": "./src/index.js",
+  "type": "module",
   "files": [
     "dist/bin/**/*"
   ],
