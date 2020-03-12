@@ -8,7 +8,8 @@
     "strict": true,
     "noImplicitAny": true,
     "preserveConstEnums": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "src/**/*.test.*", "src/**/*.spec.*", "test/**/*"]
