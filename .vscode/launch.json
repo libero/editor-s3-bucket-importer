@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Service",
+      "preLaunchTask": "npm: build",
+      "program": "${workspaceFolder}/dist/bin/index.js",
+      "runtimeArgs": ["--experimental-modules"],
+      "args": [],
+      "env": { "AWS_REGION": "us-east-2", "AWS_PROFILE": "test-editor-bucket-monitor" }
+    }
+  ]
+}
