@@ -3,16 +3,23 @@
   "coverageDirectory": "./dist/jest",
   "coverageThreshold": {
     "global": {
-      "branches": 100,
-      "functions": 100,
-      "lines": 100,
+      "branches": 60,
+      "functions": 60,
+      "lines": 60,
       "statements": 0
     }
   },
+  "globals": {
+    "ts-jest": {
+      "exclude": ["node_modules"]
+    }
+  },
   "transform": {
-    "^.+\\.(t|j)sx?$": "ts-jest"
+    "^.+\\.jsx?$": "babel-jest",
+    "^.+\\.tsx?$": "ts-jest"
   },
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
-  "testPathIgnorePatterns": ["/node_modules/", "/build/", "/dist/"]
+  "testPathIgnorePatterns": ["/node_modules/", "/build/", "/dist/", "/test/"],
+  "testTimeout": 10000
 }
