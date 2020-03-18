@@ -79,21 +79,21 @@ export class AwsSqsQueueMonitor extends EventEmitter {
     this.monitoring = true;
   }
 
-  async onCreate(objectId: string): Promise<number> {
+  private async onCreate(objectId: string): Promise<number> {
     this.emit('created', {
       objectId
     });
     return 0;
   }
 
-  async onDelete(objectId: string): Promise<number> {
+  private async onDelete(objectId: string): Promise<number> {
     this.emit('deleted', {
       objectId
     });
     return 0;
   }
 
-  async deleteMessageFromQueue(messageId: string): Promise<number> {
+  private async deleteMessageFromQueue(messageId: string): Promise<number> {
     const deleteParams: AWS.SQS.DeleteMessageRequest = {
       QueueUrl: this.queue,
       ReceiptHandle: messageId
