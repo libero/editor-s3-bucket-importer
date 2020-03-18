@@ -2,13 +2,14 @@ import { default as AWS } from 'aws-sdk';
 import { AwsSqsQueueMonitor } from '../src/awsSqsQueueMonitor';
 import { default as fs } from 'fs';
 
-describe('AwsSqsQueueMonitor', () => {
+describe('AwsSqsQueueMonitor::Poll', () => {
+  const queue = 'https://sqs.us-east-2.amazonaws.com/540790251273/test-editor-bucket-event-queue';
   let monitor: AwsSqsQueueMonitor;
   let s3: AWS.S3;
 
   beforeAll(() => {
     s3 = new AWS.S3();
-    monitor = new AwsSqsQueueMonitor(`https://sqs.us-east-2.amazonaws.com/540790251273/test-editor-bucket-event-queue`);
+    monitor = new AwsSqsQueueMonitor(queue);
   });
 
   test("Raises a 'created' event when a new object is created", async () => {

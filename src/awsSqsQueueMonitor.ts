@@ -68,14 +68,14 @@ export class AwsSqsQueueMonitor extends EventEmitter {
     }
   }
 
-  async startMonitor() {
+  async start(): Promise<void> {
     this.monitoring = true;
     do {
       await this.poll();
     } while (this.monitoring);
   }
 
-  stopMonitor(): void {
+  stop(): void {
     this.monitoring = true;
   }
 

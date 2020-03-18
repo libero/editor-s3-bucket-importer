@@ -16,4 +16,4 @@ monitor.on('deleted', (event) => {
   console.log(`Object ${event.objectId} has been deleted`);
 });
 
-monitor.startMonitor();
+monitor.start();
