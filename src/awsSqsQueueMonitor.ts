@@ -25,18 +25,32 @@ export class AwsSqsQueueMonitor extends EventEmitter {
     };
     const { Messages } = await this.sqs.receiveMessage(params).promise();
     if (Messages && Messages.length) {
-      console.log(`Got: ${Messages.length} event(s) to process`);
-
       for (const message of Messages) {
         const messageBody = JSON.parse(message.Body);
+
+        // We are only interested in events with 'Records', hence just delete other event types.
+        if (messageBody.Records === undefined) {
+          // FIXME: Should be a little more clever about when I remove a message from the queue.
+          await this.deleteMessageFromQueue(message.ReceiptHandle);
+          continue;
+        }
+
         for (const record of messageBody.Records) {
           const bucketId = record.s3.bucket.name;
           const objectId = record.s3.object.key;
           if (this.buckets.includes('*') || this.buckets.includes(bucketId)) {
             switch (record.eventName) {
               case 'ObjectCreated:Put':
-                const result = await this.onCreate(objectId);
-                if (result) {
+                const wasCreated = await this.onCreate(objectId);
+                if (wasCreated) {
+                  console.error(`failed to handle create for ${objectId}`);
+                } else {
+                  await this.deleteMessageFromQueue(message.ReceiptHandle);
+                }
+                break;
+              case 'ObjectRemoved:Delete':
+                const wasDeleted = await this.onDelete(objectId);
+                if (wasDeleted) {
                   console.error(`failed to handle create for ${objectId}`);
                 } else {
                   await this.deleteMessageFromQueue(message.ReceiptHandle);
@@ -44,13 +58,12 @@ export class AwsSqsQueueMonitor extends EventEmitter {
                 break;
               default:
                 console.info(`Unsupported event type ${record.eventName}.`);
+                // FIXME: Should be a little more clever about when I remove a message from the queue.
+                await this.deleteMessageFromQueue(message.ReceiptHandle);
                 break;
             }
           }
         }
-
-        // FIXME: Should be a little more clever about when I remove a message from the queue.
-        //await this.deleteMessageFromQueue(message.ReceiptHandle);
       }
     }
   }
@@ -75,13 +88,6 @@ export class AwsSqsQueueMonitor extends EventEmitter {
 
   async onDelete(objectId: string): Promise<number> {
     this.emit('deleted', {
-      objectId
-    });
-    return 0;
-  }
-
-  async onUpdated(objectId: string): Promise<number> {
-    this.emit('updated', {
       objectId
     });
     return 0;
